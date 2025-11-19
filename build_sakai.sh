@@ -48,7 +48,7 @@ cd - > /dev/null
 container_check_and_rm "sakai-tomcat"
 
 echo "executing rm -r ${SAKAI_DEPLOY_BASE_DIRECTORY}"
-rm -rf "${SAKAI_DEPLOY_BASE_DIRECTORY}"
+rm -rf "${SAKAI_DEPLOY_BASE_DIRECTORY}"/*
 mkdir ${SAKAI_DEPLOY_BASE_DIRECTORY}
 echo "mkdir ${SAKAI_DEPLOY_BASE_DIRECTORY}"
 tar -xzf "${TOMCAT_ARCHIVE_FILENAME}" -C "${SAKAI_DEPLOY_BASE_DIRECTORY}"
