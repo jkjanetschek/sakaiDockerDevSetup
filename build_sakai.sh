@@ -109,16 +109,16 @@ fi
 	echo "run maven build docker"
 	# Now build the code
 	docker run --rm --name maven \
-		-e "MAVEN_CONFIG=/tmp/.m2" \
-	    -v "${SAKAI_SOURCE_DIRECTORY_LOCATION}:/tmp/sakai" \
-	    -v "${MAVEN_BUILD_DATA}/.m2:/tmp/.m2" \
+		-e "MAVEN_CONFIG=/workspace/.m2" \
+	    -v "${SAKAI_SOURCE_DIRECTORY_LOCATION}:/workspace/sakai" \
+	    -v "${MAVEN_BUILD_DATA}/.m2:/workspace/.m2" \
 	    -v "${MAVEN_BUILD_DATA}/.npm:/.npm" \
 	    -v "${MAVEN_BUILD_DATA}/.config:/.config" \
 	    -v "${MAVEN_BUILD_DATA}/.cache:/.cache" \
-	    -v "${SAKAI_DEPLOY_TARGET}:/tmp/deploy/${TOMCAT_EXTRACTED_BASENAME}" \
+	    -v "${SAKAI_DEPLOY_TARGET}:/workspace/deploy/${TOMCAT_EXTRACTED_BASENAME}" \
 	    --cap-add=SYS_ADMIN \
-	    -w /tmp/sakai ${MAVEN_CONTAINER} \
-		/bin/bash -c "${SUDO_USER_CMD}${SAKAI_26_BUILD_DEPENDENCIES}${SUDO_WHOAMI}${SET_JAVA_HOME} mvn -e -T ${THREADS} -B ${UPDATES} clean install sakai:deploy -Dmaven.test.skip=${SKIP_TEST} -Djava.awt.headless=true -Dmaven.tomcat.home=/tmp/deploy/${TOMCAT_EXTRACTED_BASENAME} -Dsakai.cleanup=true -Duser.home=/tmp/ ${MVN_EXTRA_OPTS}"
+	    -w /workspace/sakai ${MAVEN_CONTAINER} \
+		/bin/bash -c "${SUDO_USER_CMD}${SAKAI_26_BUILD_DEPENDENCIES}${SUDO_WHOAMI}${SET_JAVA_HOME} mvn -e -T ${THREADS} -B ${UPDATES} clean install sakai:deploy -Dmaven.test.skip=${SKIP_TEST} -Djava.awt.headless=true -Dmaven.tomcat.home=/workspace/deploy/${TOMCAT_EXTRACTED_BASENAME} -Dsakai.cleanup=true -Duser.home=/workspace/ ${MVN_EXTRA_OPTS}"
 }
 
 
